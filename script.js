@@ -27,8 +27,8 @@ window.onload = () => { //window
     }
 }
 
-let playerXIcon = "fas fa-times"; //class name from fontawesome icon
-let playerOIcon = "far fa-circle"; //class name from fontawesome icon
+let playerXIcon = "fa fa-times"; //class name from fontawesome icon
+let playerOIcon = "fa fa-circle"; //class name from fontawesome icon
 let playerSign = "X";
 let runBot = true;
 
