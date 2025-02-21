@@ -27,8 +27,8 @@ window.onload = () => { //window
     }
 }
 
-let playerXIcon = "fa-solid fa-xmark"; //class name from fontawesome icon
-let playerOIcon = "fa-regular fa-circle"; //class name from fontawesome icon
+let playerXIcon = "uil uil-times"; //class name from fontawesome icon
+let playerOIcon = "uil uil-circle"; //class name from fontawesome icon
 let playerSign = "X";
 let runBot = true;
 
