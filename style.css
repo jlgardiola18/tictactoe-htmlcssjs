@@ -10,6 +10,11 @@ body {
     background: #56baed;
 }
 
+#bodybackground {
+    background-image: linear-gradient(180deg, rgb(243, 241, 236) 13%, transparent 13%), repeating-linear-gradient(180deg, rgb(138, 193, 207) 0px, rgb(138, 193, 207) 2px, transparent 2px, transparent 38px), linear-gradient(rgb(243, 241, 236), rgb(243, 241, 236));
+    min-height: 100vh;
+}
+
 .select-box,
 .play-board,
 .result-box {
@@ -18,10 +23,12 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .select-box {
     background: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     padding: 20px 25px 25px;
     border-radius: 5px;
     max-width: 330px;
@@ -79,22 +86,31 @@ body {
     margin-left: 5px;
 }
 
-.play-board .details {
-    background: #fff;
-    padding: 7px;
-    border-radius: 5px;
-}
-
 .play-board {
+    background: #ffffff;
+    border: 2px solid #56baed;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -50%) scale(0.9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: all 0.3s ease;
 }
 
 .play-board.show {
     opacity: 1;
     pointer-events: auto;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.play-board .details {
+    background: #fff;
+    padding: 7px;
+    border-radius: 5px;
 }
 
 .play-board .details .players {
@@ -147,24 +163,28 @@ body {
 }
 
 .play-board .play-area {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: 6px;
+    justify-content: center;
     margin-top: 20px;
 }
 
-.play-board section {
-    display: flex;
-}
-
-.play-board section span {
-    display: block;
-    margin: 2px;
-    height: 80px;
-    width: 80px;
+.play-area .box {
     background: #fff;
     border-radius: 5px;
     font-size: 40px;
     text-align: center;
     line-height: 80px;
     color: #56baed;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.play-area .box:hover {
+    background-color: #f0f8ff;
 }
 
 .result-box {

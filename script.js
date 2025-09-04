@@ -1,40 +1,35 @@
-// selecting required elements
 const selectBox = document.querySelector(".select-box"),
     SelectXbtn = selectBox.querySelector(".playerX"),
     SelectObtn = selectBox.querySelector(".playerO"),
     playBoard = document.querySelector(".play-board"),
-    allBox = document.querySelectorAll("section span"),
+    allBox = document.querySelectorAll(".play-area .box"),
     players = document.querySelector(".players"),
     resultBox = document.querySelector(".result-box"),
     wonText = resultBox.querySelector(".won-text"),
     replayBtn = resultBox.querySelector("button");
 
-window.onload = () => { //window
+window.onload = () => {
     for (let i = 0; i < allBox.length; i++) {
         allBox[i].setAttribute("onclick", "clickedBox(this)");
     }
 
-
-
     SelectXbtn.onclick = () => {
         selectBox.classList.add("hide");
         playBoard.classList.add("show");
-    }
+    };
     SelectObtn.onclick = () => {
         selectBox.classList.add("hide");
         playBoard.classList.add("show");
-        players.setAttribute("class", "players active player");
-    }
-}
+        players.classList.add("active", "player"); // Marks O player starts
+    };
+};
 
-let playerXIcon = "uil uil-times"; //class name from fontawesome icon
-let playerOIcon = "uil uil-circle"; //class name from fontawesome icon
+let playerXIcon = "uil uil-times";
+let playerOIcon = "uil uil-circle";
 let playerSign = "X";
 let runBot = true;
 
-//user function
 function clickedBox(element) {
-    // console.log(element);
     if (players.classList.contains("player")) {
         element.innerHTML = `<i class="${playerOIcon}"></i>`;
         players.classList.add("active");
@@ -54,7 +49,6 @@ function clickedBox(element) {
     }, randomDelayTime);
 }
 
-//bot function
 function bot(runBot) {
     if (runBot) {
         playerSign = "O";
@@ -95,8 +89,15 @@ function checkClass(val1, val2, val3, sign) {
 }
 
 function selectWinner() {
-    if (checkClass(1, 2, 3, playerSign) || checkClass(4, 5, 6, playerSign) || checkClass(7, 8, 9, playerSign) || checkClass(1, 4, 7, playerSign) || checkClass(2, 5, 8, playerSign) || checkClass(3, 6, 9, playerSign) || checkClass(1, 5, 9, playerSign) || checkClass(3, 5, 7, playerSign)) {
-        console.log(playerSign + " " + "is the Winner!");
+    if (checkClass(1, 2, 3, playerSign) ||
+        checkClass(4, 5, 6, playerSign) ||
+        checkClass(7, 8, 9, playerSign) ||
+        checkClass(1, 4, 7, playerSign) ||
+        checkClass(2, 5, 8, playerSign) ||
+        checkClass(3, 6, 9, playerSign) ||
+        checkClass(1, 5, 9, playerSign) ||
+        checkClass(3, 5, 7, playerSign)) {
+
         runBot = false;
         bot(runBot);
         setTimeout(() => {
@@ -106,19 +107,18 @@ function selectWinner() {
 
         wonText.innerHTML = `Player <p>${playerSign}</p> won the Game!`;
 
-    } else {
-        if (getClass(1) != "" && getClass(2) != "" && getClass(3) != "" && getClass(4) != "" && getClass(5) != "" && getClass(6) != "" && getClass(7) != "" && getClass(8) != "" && getClass(9) != "") {
-            runBot = false;
-            bot(runBot);
-            setTimeout(() => {
-                playBoard.classList.remove("show");
-                resultBox.classList.add("show");
-            }, 500);
-            wonText.textContent = `Its a Draw!`;
-        }
+    } else if ([1, 2, 3, 4, 5, 6, 7, 8, 9].every(i => getClass(i) != "")) {
+        runBot = false;
+        bot(runBot);
+        setTimeout(() => {
+            playBoard.classList.remove("show");
+            resultBox.classList.add("show");
+        }, 500);
+
+        wonText.textContent = "Match has been drawn!";
     }
 }
 
 replayBtn.onclick = () => {
     window.location.reload();
-}
+};
